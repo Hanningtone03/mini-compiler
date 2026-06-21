@@ -2,11 +2,13 @@
 
 # Mini Compiler
 
-A compiler and virtual machine for a small custom language, written from scratch in C; lexer, parser, AST, bytecode compiler, and stack-based VM with proper call frames for recursion.
+A compiler and virtual machine for a small custom language, written in C; lexer, parser, AST, bytecode compiler, and stack-based VM with proper call frames for recursion.
 
 ## How it works
 
 Source code goes through four stages. The lexer turns raw text into tokens. The parser builds an abstract syntax tree using recursive descent with correct operator precedence. The compiler walks the tree and emits bytecode instructions. The virtual machine executes that bytecode on a stack, with each function call getting its own isolated set of local variables so recursion works correctly.
+
+Pairs well with [raft-consensus](https://github.com/Hanningtone03/raft-consensus) and [tiny-blockchain](https://github.com/Hanningtone03/tiny-blockchain) — different domains, same idea: build the thing everyone else treats as a black box.
 
 ## Language features
 
@@ -52,11 +54,12 @@ func fib(n) {
 print fib(10);
 ```
 
-Outputs `55`.
+Recursive calls each get their own isolated local scope, so `fib(10)` correctly resolves to `55`:
+
+![Fibonacci recursion resolving to 55](screenshots/result.png)
 
 ## Tech
 
 - C
 - No external dependencies
-- No parser generator — hand-written recursive descent parser# mini-compiler
-A compiler and virtual machine for a small custom language, written in C: lexer, parser, AST, bytecode, and VM
+- No parser generator — hand-written recursive descent parser
